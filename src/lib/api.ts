@@ -26,8 +26,12 @@ async function request<T>(
   const { auth = true, headers = {}, ...rest } = options
 
   const finalHeaders: Record<string, string> = {
-    'Content-Type': 'application/json',
     ...(headers as Record<string, string>),
+  }
+
+  // Only set Content-Type when a body is present
+  if (rest.body !== undefined && rest.body !== null) {
+    finalHeaders['Content-Type'] = 'application/json'
   }
 
   if (auth) {
