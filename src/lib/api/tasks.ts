@@ -20,3 +20,15 @@ export function listWorkers() {
 export function getWorker(id: string) {
   return api.get<{ worker: Worker }>(`/workers/${id}`)
 }
+
+export function workerConfirm(taskId: string) {
+  return api.post<{ task: Task }>(`/tasks/${taskId}/worker-confirm`)
+}
+
+export function userConfirm(taskId: string) {
+  return api.post<{ task: Task }>(`/tasks/${taskId}/user-confirm`)
+}
+
+export function rateTask(taskId: string, rating: number) {
+  return api.post<{ task: Task }>(`/tasks/${taskId}/rate`, { rating })
+}
